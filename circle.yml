@@ -1,0 +1,25 @@
+machine:
+  node:
+    version: v6.9.5
+
+dependencies:
+  cache_directories:
+      - /home/ubuntu/nvm/versions/node/v6.9.5/bin
+      - /home/ubuntu/nvm/versions/node/v6.9.5/lib/node_modules
+  override:
+    - wget https://saucelabs.com/downloads/sc-latest-linux.tar.gz
+    - tar -xzf sc-latest-linux.tar.gz
+    - npm install
+
+test:
+  override:
+    - cd sc-*-linux && ./bin/sc --user $SAUCE_USERNAME --api-key $SAUCE_ACCESS_KEY --readyfile ~/sauce_is_ready:
+        background: true
+    - npm start:
+        background: true
+    - curl --retry 10 --retry-delay 2 -v http://localhost:3000
+    # Wait for tunnel to be ready
+    - npm run e2e:cucumber:saucelabs
+
+  post:
+    - killall --wait sc  # wait for Sauce Connect to close the tunnel

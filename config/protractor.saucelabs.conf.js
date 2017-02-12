@@ -1,4 +1,5 @@
 var helpers = require('./helpers');
+var merge = require('merge');
 
 module.exports = function (testmethod) {
 
@@ -6,7 +7,7 @@ module.exports = function (testmethod) {
 
         sauceUser: process.env.SAUCE_USERNAME,
         sauceKey: process.env.SAUCE_ACCESS_KEY,
-        baseUrl: 'http://ng2auth.samvloeberghs.be/',
+        baseUrl: 'localhost:3000',
 
         multiCapabilities: [
             {
