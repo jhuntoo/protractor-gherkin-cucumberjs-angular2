@@ -7,7 +7,7 @@ module.exports = function (testmethod) {
 
         sauceUser: process.env.SAUCE_USERNAME,
         sauceKey: process.env.SAUCE_ACCESS_KEY,
-        baseUrl: 'localhost:3000',
+        baseUrl: 'http://localhost:3000/',
 
         multiCapabilities: [
             {
